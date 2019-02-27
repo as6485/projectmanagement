@@ -139,9 +139,9 @@ public class UserController {
 	public ResponseEntity<?> updateUser(@RequestBody(required = true) User user) {
 		try {
 			int rc = userService.updateUser(user);
-			if (rc == 0) {
+/*			if (rc == 0) {
 				return new ResponseEntity<String>("User not found to update", HttpStatus.BAD_REQUEST);
-			}
+			}*/
 		} catch (SQLException e) {
 			logger.error(e);
 			return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);

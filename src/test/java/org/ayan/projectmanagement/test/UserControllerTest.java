@@ -81,12 +81,16 @@ public class UserControllerTest {
 	@Test
 	public void updateUserTest() throws Exception {
 		User user = new User();
-		user.setUserid(1);
+		user.setUserid(10);
 		user.setFirstname("Ayan");
-		user.setEmpid(1);
+		user.setEmpid(10);
+		user.setEmpid(10);
+		user.setProjectid(10);
+		user.setTaskid(10);
 		String uri = "/user";
+		Integer rc = 1;
 		
-		given(this.userService.updateUser(user)).willReturn(1);
+		given(this.userService.updateUser(user)).willReturn(rc.intValue());
 		
 		//mapper.writeValueAsString(user);
 		
