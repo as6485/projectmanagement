@@ -65,7 +65,7 @@ public class UserDAO {
 	public List<User> getAllUsersSortFname() throws SQLException {
 
 		
-		List<User> users = getAllUsers().stream().sorted((o1, o2) -> o1.getFirstname().compareTo(o2.getFirstname())).collect(Collectors.toList());
+		List<User> users = getAllUsers().stream().sorted((o1, o2) -> o1.getFirstname().toLowerCase().compareTo(o2.getFirstname().toLowerCase())).collect(Collectors.toList());
 		
 		return users;
 
@@ -73,7 +73,7 @@ public class UserDAO {
 	public List<User> getAllUsersSortLname() throws SQLException {
 
 		
-		List<User> users = getAllUsers().stream().sorted((o1, o2) -> o1.getLastname().compareTo(o2.getLastname())).collect(Collectors.toList());
+		List<User> users = getAllUsers().stream().sorted((o1, o2) -> o1.getLastname().toLowerCase().compareTo(o2.getLastname().toLowerCase())).collect(Collectors.toList());
 		
 		return users;
 

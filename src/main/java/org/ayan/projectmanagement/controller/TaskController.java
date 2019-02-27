@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ayan.projectmanagement.dto.Projects;
 import org.ayan.projectmanagement.dto.Task;
-import org.ayan.projectmanagement.service.ProjectsService;
 import org.ayan.projectmanagement.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,6 +44,19 @@ public class TaskController {
 
 		}
 
+	}
+
+	@GetMapping("/tasks")
+	public ResponseEntity<?> getAllTasks() {
+
+		try {
+			List<Task> tasks = taskService.getAllTasks();
+			return new ResponseEntity<List<Task>>(tasks, HttpStatus.OK);
+		} catch (SQLException e) {
+			logger.error(e);
+			return new ResponseEntity<String>(e.toString(), HttpStatus.BAD_REQUEST);
+
+		}
 	}
 
 	@PostMapping("/task")

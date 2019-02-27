@@ -32,4 +32,8 @@ public class TaskService {
 		return taskDAO.updateTask(task);
 
 	}
+
+	public List<Task> getAllTasks()  throws SQLException {
+		return taskDAO.getAllTasks();
+	}
 }

@@ -3,13 +3,16 @@ package org.ayan.projectmanagement.dao;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ayan.projectmanagement.dto.Task;
 import org.ayan.projectmanagement.dto.TaskRowMapper;
+import org.ayan.projectmanagement.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -92,6 +95,29 @@ public class TaskDAO {
 		params.addValue("status", task.isStatus());
 		params.addValue("task_id", task.getTaskid());
 		return jdbcTemplate.update(sql, params);
+
+	}
+
+	public List<Task> getAllTasks() throws SQLException {
+
+		final String sql = "SELECT * FROM TASK";
+		final List<Task> tasks = new ArrayList<Task>();
+		final List<Map<String, Object>> rows = jdbcTemplate2.queryForList(sql);
+
+		for (Map<String, Object> row : rows) {
+			Task task = new Task();
+			task.setTaskid((int) row.get("TASK_ID"));
+			task.setParentid((int) row.get("PARENT_ID"));
+			task.setProjectid((int) row.get("PROJECT_ID"));
+			task.setDescription((String) row.get("TASK_DESC"));
+			task.setStartDate(String.valueOf((Date) row.get("START_DATE")));
+			task.setEndDate(String.valueOf((Date) row.get("END_DATE")));
+			task.setPriority((int) row.get("PRIORTY"));
+			task.setStatus((boolean) row.get("TASK_STATUS"));
+			tasks.add(task);
+
+		}
+		return tasks;
 
 	}
 
